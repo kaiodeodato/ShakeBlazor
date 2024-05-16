@@ -1,0 +1,255 @@
+﻿@page "/"
+
+<div class="container lg:px-28">
+    <Carousel  @bind-SelectedSlide="@selectedSlide" Autoplay=@Autoplay Interval=@Interval >
+        <UseGetPhotos Context="result" Strategy="ExecutionStrategy.CacheFirst">
+            <ChildContent>
+                @if (result != null)
+                {
+                    @for (int i = 0; i < 4; i++)
+                    {
+                        var item = result?.Photos?[i];
+                       
+                            var backgroundColorStyle = $"background-color: {(item?.Color ?? "inherit")};";
+                            var colorText = $"color: {(ConverterHexParaCor(item?.Color ?? ""))};";
+                            <CarouselSlide Class="flex justify-end items-start h-80 overflow-hidden rounded-lg" style="@backgroundColorStyle" Name="@i.ToString()">
+                                <div class="w-full h-full absolute flex justify-start items-center pl-24">
+                                    <div class="hidden md:flex flex-col justify-start items-start ">
+                                        <span class="max-w-96 text-3xl font-bold drop-shadow-xl" style="@colorText">@item?.Title</span>
+                                        <a href="@item?.Link" class="mt-3 text-white bg-green-600 hover:bg-green-800 text-sm px-5 py-2.5 me-2 mb-2 rounded-lg">More</a>
+                                    </div>
+                                </div>
+                            <Image Class="rounded-lg" Source="@item?.ImageUrl" Text="Lights image" Display="Display.Block" />
+                            </CarouselSlide>
+                    }
+                }
+            </ChildContent>
+            <LoadingContent>
+                Loading ...
+            </LoadingContent>
+        </UseGetPhotos>
+    </Carousel>
+    <h1 class="text-2xl font-bold text-gray-700">Sponsored Car ads</h1>
+    <div class="flex flex-wrap justify-center gap-3 mt-3">
+        <UseGetPostByCategory Category="Cars & Bakkies" Context="result" Strategy="ExecutionStrategy.CacheFirst">
+            <ChildContent>
+                @if (result != null)
+                {
+                    @for (int i = 0; i < 6; i++)
+                    {
+                        var item = result?.Posts?[i];
+                        <div class="max-w-40 bg-white flex flex-col justify-start border border-gray-200 rounded-lg shadow hover:scale-105 duration-300">
+                            <span class="flex justify-end" href="#">
+                                <span class="absolute flex justify-center items-center bg-gray-200 w-8 h-8 rounded-full mt-1 mr-1 hover:bg-gray-300 hover:scale-105 duration-300 drop-shadow-lg">
+                                    <i class="fa-regular fa-heart text-lg text-gray-600"></i>
+                                </span>
+                                <a class="max-h-24 overflow-hidden" href="/details/@item?._id">
+                                    <img class="w-full object-cover rounded-t-lg" src="@item?.Image" alt="" />
+                                </a>
+                            </span>
+                            <div class="p-2 h-full flex flex-col justify-between items-start">
+                                <a href = "#" >
+                                    <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600">@item?.Title</h5>
+                                </a>
+                                <p class="mb-3 font-normal text-gray-600 text-xs">@Truncate(item?.Description ?? "", 60)</p>
+                                <p class="mb-3 font-normal text-gray-600 text-xs flex justify-center items-center"><i class="fa-solid fa-dollar-sign h-4 w-4 bg-green-300 flex justify-center items-center rounded-full mr-1"></i>@item?.Price</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </ChildContent>
+            <LoadingContent>
+                Loading ...
+            </LoadingContent>
+        </UseGetPostByCategory>
+    </div> 
+    <h1 class="text-2xl font-bold text-gray-700 mt-10">Our top categories</h1>
+    <div class="flex flex-wrap justify-around gap-3 mt-5">
+        <UseGetPhotos Context="result" Strategy="ExecutionStrategy.CacheFirst">
+            <ChildContent>
+                @if (result != null)
+                {
+                    @for (int i = 5; i < 11; i++)
+                    {
+                        var item = result?.Photos?[i];
+                        <div class="flex flex-col justify-center items-center">
+                            <a href="@item?.Title" class="w-36 h-36 flex justify-center items-center rounded-full" style="background: @item?.Color;">
+                                <div class="absolute hover:scale-105 duration-300">
+                                    <img class="h-40" src="@item?.ImageUrl" />
+                                </div>
+                            </a>
+                            <span class="text-lg text-gray-600 mt-3">
+                                @item?.Title
+                            </span>
+                        </div>
+                    }
+                }
+            </ChildContent>
+            <LoadingContent>
+                Loading ...
+            </LoadingContent>
+        </UseGetPhotos>
+    </div>
+
+    <h1 class="text-2xl font-bold text-gray-700 mt-10">Browse 863,384 live ads</h1>
+    <div class="flex flex-wrap flex-row justify-around items-start gap-4 mt-4">
+        <UseGetPhotos Context="result" Strategy="ExecutionStrategy.CacheFirst">
+            <ChildContent>
+                @if (result != null)
+                {
+                    @for (int i = 4; i < result?.Photos?.Count; i++)
+                    {
+                        var photo = result?.Photos?[i];
+                        <div class="flex flex-col justify-center w-40">
+                            <a href="@photo?.Title" class="flex justify-center items-center mt-25 w-8 h-8 rounded-full mt-1 mr-1 hover:bg-gray-300 hover:scale-105 duration-300 drop-shadow-lg" style="background-color:@photo?.Color;">
+                                <i class="@photo?.Link text-lg text-gray-600"></i>
+                            </a>
+
+                            <a href="@photo?.Title" class="mt-3 text-md font-bold text-gray-600">@photo?.Title</a>
+                            <div class="flex flex-col mt-2 ">
+                                <UseGetPostByCategory Category="@photo?.Title" Context="response" Strategy="ExecutionStrategy.CacheFirst">
+                                    <ChildContent>
+                                        @if (response != null)
+                                        {
+                                            @foreach (var item in response.Posts)
+                                            {
+                                                <a class="mt-1 text-xs text-gray-500 flex justify-start w-auto hover:text-green-500" href="/details/@item?._id">
+                                                    @item?.Title
+                                                </a>
+                                            }
+                                        }
+                                    </ChildContent>
+                                    <LoadingContent>
+                                        Loading ...
+                                    </LoadingContent>
+                                </UseGetPostByCategory>
+                            </div>
+                        </div>
+                    }
+                }
+            </ChildContent>
+            <LoadingContent>
+                Loading ...
+            </LoadingContent>
+        </UseGetPhotos>
+    </div>
+
+    <h1 class="text-2xl font-bold text-gray-700">Best Rating Jobs</h1>
+    <div class="flex flex-wrap justify-center gap-3 mt-3">
+        <UseGetPostByCategory Category="Services" Context="result" Strategy="ExecutionStrategy.CacheFirst">
+            <ChildContent>
+                @if (result != null)
+                {
+                    @for (int i = 0; i < 6; i++)
+                    {
+                        var item = result?.Posts?[i];
+                        <div class="max-w-40 bg-white flex flex-col justify-start border border-gray-200 rounded-lg shadow hover:scale-105 duration-300">
+                            <span class="flex justify-end" href="#">
+                                <span class="absolute flex justify-center items-center bg-gray-200 w-8 h-8 rounded-full mt-1 mr-1 hover:bg-gray-300 hover:scale-105 duration-300 drop-shadow-lg">
+                                    <i class="fa-regular fa-heart text-lg text-gray-600"></i>
+                                </span>
+                                <a class="max-h-24 overflow-hidden" href="/details/@item?._id">
+                                    <img class="w-full object-cover rounded-t-lg" src="@item?.Image" alt="" />
+                                </a>
+                            </span>
+                            <div class="p-2 h-full flex flex-col justify-between items-start">
+                                <a href="#">
+                                    <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600">@item?.Title</h5>
+                                </a>
+                                <p class="mb-3 font-normal text-gray-600 text-xs">@Truncate(item?.Description ?? "", 60)</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </ChildContent>
+            <LoadingContent>
+                Loading ...
+            </LoadingContent>
+        </UseGetPostByCategory>
+
+        <UseGetPostByCategory Category="Jobs" Context="result" Strategy="ExecutionStrategy.CacheFirst">
+            <ChildContent>
+                @if (result != null)
+                {
+                    @for (int i = 0; i < 6; i++)
+                    {
+                        var item = result?.Posts?[i];
+                        <div class="max-w-40 bg-white flex flex-col justify-start border border-gray-200 rounded-lg shadow hover:scale-105 duration-300">
+                            <span class="flex justify-end" href="#">
+                                <span class="absolute flex justify-center items-center bg-gray-200 w-8 h-8 rounded-full mt-1 mr-1 hover:bg-gray-300 hover:scale-105 duration-300 drop-shadow-lg">
+                                    <i class="fa-regular fa-heart text-lg text-gray-600"></i>
+                                </span>
+                                <a class="max-h-24 overflow-hidden" href="/details/@item?._id">
+                                    <img class="w-full object-cover rounded-t-lg" src="@item?.Image" alt="" />
+                                </a>
+                            </span>
+                            <div class="p-2 h-full flex flex-col justify-between items-start">
+                                <a href="#">
+                                    <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600">@item?.Title</h5>
+                                </a>
+                                <p class="mb-3 font-normal text-gray-600 text-xs">@Truncate(item?.Description ?? "", 60)</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </ChildContent>
+            <LoadingContent>
+                Loading ...
+            </LoadingContent>
+        </UseGetPostByCategory>
+    </div>
+</div>
+
+@code {
+    private string selectedSlide = "2";
+    private bool Autoplay = true;
+    private int Interval = 1000;
+    private string corTexto = "text-gray-500";
+    public string id = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Autoplay = true;
+        Interval = 1000;
+
+        await Task.Delay(1000);
+
+        Autoplay = true;
+        Interval = 8000;
+    }
+
+    public string ConverterHexParaCor(string corHex)
+    {
+        if (corHex.StartsWith("#"))
+        {
+            corHex = corHex.Substring(1);
+        }
+
+        int valorDecimal = Convert.ToInt32(corHex, 16);
+        corTexto = CorTexto(valorDecimal);
+
+        return corTexto;
+    }
+
+    public static string CorTexto(int valorDecimal)
+    {
+        if (valorDecimal < 8947848)
+        {
+            return "#eee";
+        }
+        else
+        {
+            return "#333";
+        }
+    }
+      public static string Truncate(string value, int maxLength)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return value;
+        }
+        return value.Length <= maxLength ? value : value.Substring(0, maxLength) + "...";
+    }
+}
+
+

@@ -1,0 +1,62 @@
+﻿@inherits LayoutComponentBase
+<div class="flex flex-col">
+    <div>
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="content">
+            @Body
+        </div>
+
+        <div class="w-full flex flex-col  mt-24 pt-3 md:p-12 " style="background-color:#3d3242;">
+            <div class="container px-1 md:px-20">
+                <div class="flex flex-row gap-5" id="up">
+                    <div class="w-20 h-20">
+                        <img src="https://cdn-1.webcatalog.io/catalog/gumtree/gumtree-icon-filled-256.png?v=1712227255832" />
+                    </div>
+                    <div class="flex flex-row text-white gap-5">
+                        <div class="flex flex-col gap-1">
+                            <a href="#" class="text-green-500">Help</a>
+                            <a href="#" class="text-xs">Help Centre</a>
+                            <a href="#" class="text-xs">Selling & Buying</a>
+                            <a href="#" class="text-xs">Staying Safe</a>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <a href="#" class="text-green-500">Explore</a>
+                            <a href="#" class="text-xs">Gumtree PRO</a>
+                            <a href="#" class="text-xs">Get Verified</a>
+                            <a href="#" class="text-xs">Gumtree Blog</a>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <a href="#" class="text-green-500">Legal Bits</a>
+                            <a href="#" class="text-xs">Terms of Use</a>
+                            <a href="#" class="text-xs">Privacy Policy</a>
+                            <a href="#" class="text-xs">Cookie Notice</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row flex-wrap justify-center md:justify-between items-center mt-12" id="down">
+                    <div class="flex flex-row justify-center items-center gap-4 p-8">
+                        <i class="fa-brands fa-facebook-f text-white"></i>
+                        <i class="fa-brands fa-x-twitter text-white"></i>
+                        <i class="fa-brands fa-youtube text-white"></i>
+                        <i class="fa-brands fa-linkedin-in text-white"></i>
+                    </div>
+                    <div class="">
+                        <div class="flex flex-row flex-wrap justify-center gap-7">
+                            <div class="w-32">
+                                <img src="https://lh3.googleusercontent.com/RyLoNcOmb91IxHIP9NWfC82chbsCsT-5R25efns1FmuM8xz6znE4CRjIEBosZ1FH2xG1UqH6Axyp-vPFnm4sazbrsaB-S0QT_cN9uWU9UKoSQYCjYQ=s0" />
+                            </div>
+                            <div class="w-32">
+                                <img src="https://classistatic.gumtree.co.za/assets/images/en_ZA/appstore-d0558d9106.svg" />
+                            </div>
+                        </div>
+                        <span class="text-white text-xs">Copyright © 2024 | Gumtree South Africa (Pty) Ltd</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>

@@ -1,0 +1,149 @@
+﻿<nav style="background-color:#281b2d;">
+    <div class="max-w-screen grid grid-cols-4 md:grid-cols-4 lg:grid-cols-4 items-center justify-between mx-auto">
+
+        <div class="col-span-1">
+            <a class="" href="/">
+                <div class="max-w-48 ml-0 md:ml-8" >
+                    <img  src="https://www.alleywatch.com/wp-content/uploads/2023/01/gumtree-750x226.png" />
+                </div>
+            </a>
+        </div>
+        <div class="col-span-3 md:col-span-2 md:col-span-4 lg:col-span-2 ">
+            <form class="m-2">
+                <div class="flex">
+                    <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 lg:flex hidden z-10 inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-gray-500 bg-gray-100 border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-200 focus:outline-none focus:ring-gray-300 duration-300" type="button">
+                        <i class="fa-solid fa-list mr-2 text-green-500"></i> Category <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                        </svg>
+                    </button>
+                    <div id="dropdown" class="mt-11 z-30 ml-4 absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                        <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-button">
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cars & Bakkies</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Property</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Home & Garden</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Services</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Baby & Kids</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Clothes</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Electronics</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="relative flex w-full">
+                        <input type="search" id="search-dropdown" class="block w-full p-2.5 z-20 text-sm text-gray-900 bg-gray-50  border border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-s-full md:rounded-s-lg lg:rounded-s-none" placeholder="Search" required />
+                   
+                        <button id="dropdownCountries-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 lg:flex hidden z-10 inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-gray-500 bg-gray-100 border border-e-0 border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-gray-300 duration-300" type="button">
+                            <i class="fa-solid fa-list mr-2 text-green-500"></i> All South Africa <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+
+                        <div id="dropdownCountries" class="mt-11 ml-72 z-30 absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-button">
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All South Africa</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Eastern Cape</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Free State</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Gauteng</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">KwaZulu-Natal</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Limpopo</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mpumalanga</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Northern Cape</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button type="submit" class="top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-green-500 rounded-e-full md:rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
+                            <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-span-1 hidden md:block" id="navbarDrop">
+            <ul class="flex flex-row justify-center items-center text-center font-medium">
+                <li>
+                    <a href="#" class="text-xs md:text-sm  px-2 text-white">Sign up</a>
+                </li>
+                <li>
+                    <a href="#" class="text-xs md:text-sm px-2 text-white">Log in</a>
+                </li>
+                <li>
+                    <a href="#" class="text-xs md:text-sm px-2 mr-3 text-white flex justify-center items-center"><span class="text-2xl mr-1">+</span> post FREE Ad</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
+<div class="w-full">
+    <div class="hidden lg:flex flex-row justify-around items-center text-center font-medium pt-1 gap-4 shadow-sm">
+        <UseGetPhotos Context="result">
+            <ChildContent>
+                @if (result != null)
+                {
+                    @foreach (var item in result.Photos!.Skip(4))
+                    {
+                        <a href="#@item?.Title">
+                            <div class="flex justify-center items-center border-b-4 border-transparent hover:border-green-500 pb-1 duration-300">
+                                <div class="w-7 h-7 rounded-full" style="background-color:@item?.Color;">
+                                    <i class="@item?.Link text-xs text-gray-700"></i>
+                                </div>
+                                <span class="text-xs md:text-sm  px-2 text-gray-600">@item?.Title</span>
+
+                            </div>
+                        </a>
+                    }
+                }
+            </ChildContent>
+            <LoadingContent>
+                Loading ...
+            </LoadingContent>
+        </UseGetPhotos>
+    </div>
+</div>
+
+
+
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+        await JS.InvokeVoidAsync("toggleNavbar");
+        }
+    }
+}

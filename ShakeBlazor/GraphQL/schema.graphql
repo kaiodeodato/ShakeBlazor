@@ -1,0 +1,149 @@
+﻿
+schema {
+  query: Query
+}
+
+  type Query {
+    books(limit: Int, order: String): [Book]!
+    authors(limit: Int): [Author]
+    publishers(filter: String): [Publisher]
+    photos(limit: Int): [Photos]
+    posts(limit: Int, category: String, categoryDistict: Boolean, year:Int, priceRange: Boolean, id: ID): [Post]!
+  }
+
+  type Book {
+    title: String!
+    author: [Author]
+    publisher: Publisher
+  }
+
+  type Author {
+    name: String
+    booksByAuthor: [Book]
+  }
+
+  type Publisher {
+    company: String
+    booksByPublisher: [Book]
+  }
+
+  type Post {
+    _id: ID
+    Title: String!
+    SaleBy: String
+    Price: Float
+    PublicationYear: String
+    Category: String
+    Publisher: String
+    Views: Int
+    Image: String
+    Description: String
+    GeneralDetails: GeneralDetails
+    minPrice: Float
+    maxPrice: Float
+  }
+
+  type GeneralDetails {
+    FashionStyles: String
+    Fabric: String
+    Color: String
+    ParentingTips: String
+    ChildDevelopment: String
+    ChildColor: String
+    CleaningServiceTypes: String
+    CleaningCustomerSatisfaction: String
+    CleaningAvailability: String
+    PlumbingServiceTypes: String
+    PlumbingCustomerSatisfaction: String
+    PlumbingAvailability: String
+    HouseCleaningServiceTypes: String
+    HouseCleaningCustomerSatisfaction: String
+    HouseCleaningAvailability: String
+    RepairsServiceTypes: String
+    RepairsCustomerSatisfaction: String
+    RepairsAvailability: String
+    ITServiceTypes: String
+    ITCustomerSatisfaction: String
+    ITAvailability: String
+    LandscapingServiceTypes: String
+    LandscapingCustomerSatisfaction: String
+    LandscapingAvailability: String
+    ConsultationServiceTypes: String
+    ConsultationCustomerSatisfaction: String
+    ConsultationAvailability: String
+    FitnessServiceTypes: String
+    FitnessCustomerSatisfaction: String
+    FitnessAvailability: String
+    FinancialServiceTypes: String
+    FinancialCustomerSatisfaction: String
+    FinancialAvailability: String
+    EducationServiceTypes: String
+    EducationCustomerSatisfaction: String
+    EducationAvailability: String
+    LegalServiceTypes: String
+    LegalCustomerSatisfaction: String
+    LegalAvailability: String
+    OnlinePresence: String
+    Networking: String
+    BrandIdentity: String
+    ModernDesign: String
+    CityViews: String
+    ModernLocation: String
+    Acreage: String
+    FarmFeatures: String
+    AcreageLocation: String
+    WaterfrontLiving: String
+    LuxuryAmenities: String
+    WaterfrontLocation: String
+    GreenFeatures: String
+    EnergyEfficiency: String
+    GreenLocation: String
+    VictorianArchitecture: String
+    HistoricCharm: String
+    VictorianLocation: String
+    MountainViews: String
+    CozyInterior: String
+    MountainLocation: String
+    ForestSetting: String
+    Privacy: String
+    ForestLocation: String
+    TVScreenSize: String
+    TVResolution: String
+    TVSmartFeatures: String
+    HeadphonesBatteryLife: String
+    HeadphonesWaterResistance: String
+    HeadphonesConnection: String
+    PCProcessor: String
+    PCGraphics: String
+    PCRAM: String
+    CameraResolution: String
+    CameraNightVision: String
+    CameraConnection: String
+    KeyboardLayout: String
+    MouseDPI: String
+    KeyboardMouseConnection: String
+    SpeakerBatteryLife: String
+    SpeakerBluetoothVersion: String
+    SpeakerWaterResistance: String
+    WatchDisplay: String
+    WatchFitnessTracking: String
+    WatchBatteryLife: String
+    DisplayCompatibility: String
+    DisplayType: String
+    DisplayConnection: String
+    CarEngine: String
+    CarFuelType: String
+    CarHorsepower: String
+    FurnitureFabric: String
+    FurnitureColor: String
+    GenericFabric: String
+    GenericColor: String
+  }
+
+
+  type Photos {
+    ImageUrl: String
+    Color: String
+    Title: String
+    Link: String
+  }

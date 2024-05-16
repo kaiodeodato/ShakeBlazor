@@ -1,0 +1,9 @@
+query GetPostByCategory($category: String){
+  posts(category: $category) {
+    _id
+    Price
+    Image
+    Description
+    Title
+  }
+}

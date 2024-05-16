@@ -1,0 +1,8 @@
+query GetPhotos{
+  photos {
+    Color
+    ImageUrl
+    Link
+    Title
+  }
+}

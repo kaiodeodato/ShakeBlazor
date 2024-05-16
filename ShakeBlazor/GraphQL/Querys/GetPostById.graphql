@@ -1,0 +1,13 @@
+query GetPostById($Id: ID) {
+  posts(id: $Id) {
+    Category
+    Description
+    Image
+    Price
+    PublicationYear
+    Publisher
+    SaleBy
+    Title
+    Views
+  }
+}
