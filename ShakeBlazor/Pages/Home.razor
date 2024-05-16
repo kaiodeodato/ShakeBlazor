@@ -436,7 +436,7 @@ else
                         {
                             var item = result?.Photos?[i];
                             <div class="flex flex-col justify-center items-center">
-                                <a href="@item?.Title" class="w-36 h-36 flex justify-center items-center rounded-full" style="background: @item?.Color;">
+                                <a href="/ShakeBlazor/@item?.Title" class="w-36 h-36 flex justify-center items-center rounded-full" style="background: @item?.Color;">
                                     <div class="absolute hover:scale-105 duration-300">
                                         <img class="h-40" src="@item?.ImageUrl" />
                                     </div>
@@ -478,7 +478,7 @@ else
                                             {
                                                 @foreach (var item in response.Posts)
                                                 {
-                                                    <a class="mt-1 text-xs text-gray-500 flex justify-start w-auto hover:text-green-500" href="@item?._id">
+                                                    <a class="mt-1 text-xs text-gray-500 flex justify-start w-auto hover:text-green-500" href="/ShakeBlazor/@item?._id">
                                                         @item?.Title
                                                     </a>
                                                 }
