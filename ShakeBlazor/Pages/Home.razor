@@ -1,5 +1,4 @@
-﻿@using Pages
-@page "/{id?}"
+﻿@page "/{id?}"
 
 @code {
     [Parameter]
@@ -209,7 +208,334 @@
 }
 else
 {
-   <base/>
+    <div class="container lg:px-28">
+        <UseGetPostById Id="@id" Context="result" Strategy="ExecutionStrategy.CacheFirst">
+            <ChildContent>
+                @if (result != null)
+                {
+                    var item = result?.Posts?[0];
+                    <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 justify-center items-center md:items-stretch ">
+                        <div class="col-span-2">
+                            <div class="flex flex-col bg-white rounded-lg drop-shadow-md border-1 border-gray-200">
+                                <h1 class="p-3 text-2xl text-gray-600">@item?.Title</h1>
+                                <div class="overflow-hidden rounded-lg" style="max-height:600px;">
+                                    <img style="object-position:center;" class="w-full object-cover rounded-lg" src="@item?.Image" />
+                                </div>
+                                <div class="flex justify-between items-center p-2">
+                                    <div class="flex flex-row justify-center items-center text-gray-600 ">
+                                        <i class="fa-solid fa-money-bills mx-2 text-green-500"></i>
+                                        <span class="mx-2">@item?.SaleBy</span>
+                                    </div>
+                                    <div class="flex flex-row justify-center items-center text-gray-600">
+                                        <i class="fa-solid fa-eye mx-2 text-green-500"></i>
+                                        <span class="mx-2">@item?.Views</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col bg-white rounded-lg drop-shadow-md my-3">
+                                <h1 class="p-3 text-xl text-gray-600">General Details</h1>
+                                <div class="flex justify-between items-center p-2">
+                                    <div class="flex flex-row justify-center items-center text-gray-600 ">
+                                        <i class="fa-solid fa-bullhorn mx-2 text-green-500"></i>
+                                        <span class="mx-2">@item?.Price</span>
+                                    </div>
+                                    <div class="flex flex-row justify-center items-center text-gray-600">
+                                        <i class="fa-solid fa-calendar-days mx-2 text-green-500"></i>
+                                        <span class="mx-2">@item?.PublicationYear</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col bg-white rounded-lg drop-shadow-md my-3">
+                                <h1 class="p-3 text-xl text-gray-600">Description</h1>
+                                <div class="flex justify-between items-center p-2">
+                                    <pre class="text-sm text-gray-400 p-3" style="white-space: pre-line;">
+                                        @item?.Description
+                                        </pre>
+                                </div>
+                            </div>
+                            <!-- horizontal cards -->
+                            <h1 class="text-xl font-bold text-gray-500 my-6">You May Like</h1>
+                            <div class="flex flex-col justify-center  gap-4" id="horizontal_cards">
+                                <UseGetPostByCategory Category="@item?.Category" Context="response" Strategy="ExecutionStrategy.CacheFirst">
+                                    <ChildContent>
+                                        @if (response != null)
+                                        {
+                                            @for (int i = 0; i < 6; i++)
+                                            {
+                                                var post = response?.Posts?[i];
+                                                <a href="/ShakeBlazor/@post?._id" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 h-32 overflow-hidden">
+                                                    <div class="w-full md:w-56 overflow-hidden">
+                                                        <img class="object-cover w-full "
+                                                             src="@post?.Image" alt="@post?.Title">
+                                                    </div>
+                                                    <div class="flex flex-col justify-between p-4">
+                                                        <h5 class="mb-2 text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-gray-600 ">@post?.Title</h5>
+                                                        <p class="max-w-96 mb-3 font-normal text-gray-400">@Truncate(item?.Description ?? "", 90)</p>
+                                                    </div>
+                                                </a>
+
+                                            }
+                                        }
+                                    </ChildContent>
+                                    <LoadingContent>
+                                        Loading ...
+                                    </LoadingContent>
+                                </UseGetPostByCategory>
+                            </div>
+
+                        </div>
+
+                        <div class="overflow-hidden relative w-full">
+
+                            <div class="flex flex-col bg-white rounded-lg drop-shadow-lg border-gray-200 border-1 mb-5 overflow-hidden">
+                                <div class="flex flex-row justify-center items-center bg-gray-800 gap-3 p-2">
+                                    <div class="flex flex-row justify-center items-center bg-gray-600 min-w-20 min-h-20 rounded-full border-4 border-gray-200">
+                                        <i class="fa-solid fa-user text-white text-4xl"></i>
+                                    </div>
+                                    <div class="flex flex-col text-white">
+                                        <h1 class="text-lg">@item?.Publisher</h1>
+                                        <span class="text-sm text-gray-300">@item?.Views views</span>
+                                        <span class="text-sm ">@item?.PublicationYear</span>
+                                    </div>
+                                </div>
+                                <hr class="bg-gray-300 mb-3">
+                                <div class="flex flex-row justify-center items-center pt-2 gap-3">
+                                    <i class="fa-solid fa-briefcase text-green-500"></i>
+                                    <a href="#" class="text-green-500 text-sm hover:text-green-800 ">Professional Seller</a>
+                                </div>
+                                <hr class="m-2 bg-gray-300 my-3">
+                                <h2 class="px-3 text-md">Product stats</h2>
+                                <div class="flex flex-col p-2">
+                                    <div class="flex flex-row items-center text-gray-600 my-1">
+                                        <i class="fa-solid fa-bullhorn mx-2"></i>
+                                        <span class="mx-2 text-sm">@item?.Price</span>
+                                    </div>
+                                    <div class="flex flex-row items-center text-gray-600 my-1">
+                                        <i class="fa-solid fa-calendar-days mx-2"></i>
+                                        <span class="mx-2 text-sm">@item?.PublicationYear</span>
+                                    </div>
+                                    <hr class="bg-gray-400 my-4">
+                                    <div class="flex flex-row justify-center items-center pt-2">
+                                        <a href="#" class="text-green-500 text-sm hover:text-green-800 ">VIEW SELLER PROFILE</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="flex flex-col bg-white rounded-lg drop-shadow-lg border-gray-200 border-1 mb-5 overflow-hidden" id="stickyWindow" style="height:600px;">
+                                <div class="flex flex-row justify-center items-center bg-gray-800 gap-3 p-2">
+                                    <div class="flex flex-col text-white">
+                                        <h1 class="text-lg">@item?.Publisher</h1>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row justify-center items-center pt-2 gap-3">
+                                    <i class="fa-solid fa-phone text-green-500"></i>
+                                    <a href="#" class="text-green-500 text-sm hover:text-green-800 ">011 ******** Show Number</a>
+                                </div>
+                                <hr class="my-2 text-gray-300">
+                                <h2 class="px-3 text-md">Product stats</h2>
+                                <div class="flex flex-col p-2">
+                                    <form class="max-w-sm flex flex-col gap-3 p-2">
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <label for="Message" class="block text-sm font-medium text-gray-700 ">Message</label>
+                                                <span class="text-green-500 text-xs">(Required)</span>
+                                            </div>
+                                            <textarea type="text" id="Message" rows="3" class="block w-full p-2 text-gray-700 border border-gray-300 rounded-lg bg-gray-50 text-xs required"></textarea>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <label for="Name" class="block text-sm font-medium text-gray-700 ">Name</label>
+                                                <span class="text-green-500 text-xs">(Required)</span>
+                                            </div>
+                                            <input type="text" id="Name" class="block w-full p-2 text-gray-700 border border-gray-300 rounded-lg bg-gray-50 text-xs required">
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <label for="Email" class="block text-sm font-medium text-gray-700 ">Email Address</label>
+                                                <span class="text-green-500 text-xs">(Required)</span>
+                                            </div>
+                                            <input type="text" id="Email" class="block w-full p-2 text-gray-700 border border-gray-300 rounded-lg bg-gray-50 text-xs required">
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <label for="Phone" class="block text-sm font-medium text-gray-700 ">Phone</label>
+                                                <span class="text-green-500 text-xs">(Required)</span>
+                                            </div>
+                                            <input type="text" id="Phone" class="block w-full p-2 text-gray-700 border border-gray-300 rounded-lg bg-gray-50 text-xs required">
+                                        </div>
+                                        <button type="submit" class="text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register new account</button>
+                                        <p class="text-center text-gray-300 text-xs mt-3">By clicking "Send Message" you accept the Terms of Use and Privacy Notice.</p>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </ChildContent>
+            <LoadingContent>
+                Loading ...
+            </LoadingContent>
+        </UseGetPostById>
+
+
+
+
+
+
+
+        <!-- car cards -->
+        <h1 class="text-2xl font-bold text-gray-700 mt-10">Sponsored Car ads</h1>
+        <div class="flex flex-wrap justify-center gap-3 mt-3">
+            <UseGetPostByCategory Category="Cars & Bakkies" Context="result" Strategy="ExecutionStrategy.CacheFirst">
+                <ChildContent>
+                    @if (result != null)
+                    {
+                        @for (int i = 0; i < 6; i++)
+                        {
+                            var item = result?.Posts?[i];
+                            <div class="max-w-40 bg-white flex flex-col justify-start border border-gray-200 rounded-lg shadow hover:scale-105 duration-300">
+                                <span class="flex justify-end" href="#">
+                                    <span class="absolute flex justify-center items-center bg-gray-200 w-8 h-8 rounded-full mt-1 mr-1 hover:bg-gray-300 hover:scale-105 duration-300 drop-shadow-lg">
+                                        <i class="fa-regular fa-heart text-lg text-gray-600"></i>
+                                    </span>
+                                    <a class="max-h-24 overflow-hidden" href="/ShakeBlazor/@item?._id">
+                                        <img class="w-full object-cover rounded-t-lg" src="@item?.Image" alt="" />
+                                    </a>
+                                </span>
+                                <div class="p-2 h-full flex flex-col justify-between items-start">
+                                    <a href="/ShakeBlazor/@item?._id">
+                                        <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600">@item?.Title</h5>
+                                    </a>
+                                    <p class="mb-3 font-normal text-gray-600 text-xs">@Truncate(item?.Description ?? "", 60)</p>
+                                    <p class="mb-3 font-normal text-gray-600 text-xs flex justify-center items-center"><i class="fa-solid fa-dollar-sign h-4 w-4 bg-green-300 flex justify-center items-center rounded-full mr-1"></i>@item?.Price</p>
+                                </div>
+                            </div>
+
+                        }
+                    }
+                </ChildContent>
+                <LoadingContent>
+                    Loading ...
+                </LoadingContent>
+            </UseGetPostByCategory>
+        </div>
+
+        <!-- categories icons -->
+        <h1 class="text-2xl font-bold text-gray-700 mt-10">Our top categories</h1>
+        <div class="flex flex-wrap justify-around gap-3 mt-5">
+
+            <UseGetPhotos Context="result" Strategy="ExecutionStrategy.CacheFirst">
+                <ChildContent>
+                    @if (result != null)
+                    {
+                        @for (int i = 5; i < 11; i++)
+                        {
+                            var item = result?.Photos?[i];
+                            <div class="flex flex-col justify-center items-center">
+                                <a href="/ShakeBlazor/@item?.Title" class="w-36 h-36 flex justify-center items-center rounded-full" style="background: @item?.Color;">
+                                    <div class="absolute hover:scale-105 duration-300">
+                                        <img class="h-40" src="@item?.ImageUrl" />
+                                    </div>
+                                </a>
+                                <span class="text-lg text-gray-600 mt-3">
+                                    @item?.Title
+                                </span>
+                            </div>
+
+                        }
+                    }
+                </ChildContent>
+                <LoadingContent>
+                    Loading ...
+                </LoadingContent>
+            </UseGetPhotos>
+        </div>
+
+        <!-- list of products by categories -->
+        <h1 class="text-2xl font-bold text-gray-700 mt-10">Browse 863,384 live ads</h1>
+        <div class="flex flex-wrap flex-row justify-around items-start gap-4 mt-4">
+            <UseGetPhotos Context="result" Strategy="ExecutionStrategy.CacheFirst">
+                <ChildContent>
+                    @if (result != null)
+                    {
+                        @for (int i = 4; i < result?.Photos?.Count; i++)
+                        {
+                            var photo = result?.Photos?[i];
+                            <div class="flex flex-col justify-center w-40">
+                                <a href="@photo?.Title" class="flex justify-center items-center mt-25 w-8 h-8 rounded-full mt-1 mr-1 hover:bg-gray-300 hover:scale-105 duration-300 drop-shadow-lg" style="background-color:@photo?.Color;">
+                                    <i class="@photo?.Link text-lg text-gray-600"></i>
+                                </a>
+
+                                <a href="@photo?.Title" class="mt-3 text-md font-bold text-gray-600">@photo?.Title</a>
+                                <div class="flex flex-col mt-2 ">
+                                    <UseGetPostByCategory Category="@photo?.Title" Context="response" Strategy="ExecutionStrategy.CacheFirst">
+                                        <ChildContent>
+                                            @if (response != null)
+                                            {
+                                                @foreach (var item in response.Posts)
+                                                {
+                                                    <a class="mt-1 text-xs text-gray-500 flex justify-start w-auto hover:text-green-500" href="/ShakeBlazor/@item?._id">
+                                                        @item?.Title
+                                                    </a>
+                                                }
+                                            }
+                                        </ChildContent>
+                                        <LoadingContent>
+                                            Loading ...
+                                        </LoadingContent>
+                                    </UseGetPostByCategory>
+                                </div>
+                            </div>
+                        }
+                    }
+                </ChildContent>
+                <LoadingContent>
+                    Loading ...
+                </LoadingContent>
+            </UseGetPhotos>
+        </div>
+
+        <!-- clothes cards -->
+        <h1 class="text-2xl font-bold text-gray-700">Best Rating Jobs</h1>
+        <div class="flex flex-wrap justify-center gap-3 mt-3">
+            <UseGetPostByCategory Category="Jobs" Context="result" Strategy="ExecutionStrategy.CacheFirst">
+                <ChildContent>
+                    @if (result != null)
+                    {
+                        @for (int i = 0; i < 6; i++)
+                        {
+                            var item = result?.Posts?[i];
+                            <div class="max-w-40 bg-white flex flex-col justify-start border border-gray-200 rounded-lg shadow hover:scale-105 duration-300">
+                                <span class="flex justify-end" href="#">
+                                    <span class="absolute flex justify-center items-center bg-gray-200 w-8 h-8 rounded-full mt-1 mr-1 hover:bg-gray-300 hover:scale-105 duration-300 drop-shadow-lg">
+                                        <i class="fa-regular fa-heart text-lg text-gray-600"></i>
+                                    </span>
+                                    <a class="max-h-24 overflow-hidden" href="/ShakeBlazor/@item?._id">
+                                        <img class="w-full object-cover rounded-t-lg" src="@item?.Image" alt="" />
+                                    </a>
+                                </span>
+                                <div class="p-2 h-full flex flex-col justify-between items-start">
+                                    <a href="#">
+                                        <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600">@item?.Title</h5>
+                                    </a>
+                                    <p class="mb-3 font-normal text-gray-600 text-xs">@Truncate(item?.Description ?? "", 60)</p>
+                                    <p class="mb-3 font-normal text-gray-600 text-xs flex justify-center items-center"><i class="fa-solid fa-dollar-sign h-4 w-4 bg-green-300 flex justify-center items-center rounded-full mr-1"></i>@item?.Price</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </ChildContent>
+                <LoadingContent>
+                    Loading ...
+                </LoadingContent>
+            </UseGetPostByCategory>
+        </div>
+
+    </div>
 }
 
 @code {
