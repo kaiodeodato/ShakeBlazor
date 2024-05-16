@@ -264,7 +264,7 @@ else
                                             @for (int i = 0; i < 6; i++)
                                             {
                                                 var post = response?.Posts?[i];
-                                                <a href="/details/@post?._id" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 h-32 overflow-hidden">
+                                                <a href="/ShakeBlazor/details/@post?._id" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 h-32 overflow-hidden">
                                                     <div class="w-full md:w-56 overflow-hidden">
                                                         <img class="object-cover w-full "
                                                              src="@post?.Image" alt="@post?.Title">
@@ -402,12 +402,12 @@ else
                                     <span class="absolute flex justify-center items-center bg-gray-200 w-8 h-8 rounded-full mt-1 mr-1 hover:bg-gray-300 hover:scale-105 duration-300 drop-shadow-lg">
                                         <i class="fa-regular fa-heart text-lg text-gray-600"></i>
                                     </span>
-                                    <a class="max-h-24 overflow-hidden" href="/details/@item?._id">
+                                    <a class="max-h-24 overflow-hidden" href="/ShakeBlazor/details/@item?._id">
                                         <img class="w-full object-cover rounded-t-lg" src="@item?.Image" alt="" />
                                     </a>
                                 </span>
                                 <div class="p-2 h-full flex flex-col justify-between items-start">
-                                    <a href="/details/@item?._id">
+                                    <a href="/ShakeBlazor/details/@item?._id">
                                         <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600">@item?.Title</h5>
                                     </a>
                                     <p class="mb-3 font-normal text-gray-600 text-xs">@Truncate(item?.Description ?? "", 60)</p>
@@ -514,7 +514,7 @@ else
                                     <span class="absolute flex justify-center items-center bg-gray-200 w-8 h-8 rounded-full mt-1 mr-1 hover:bg-gray-300 hover:scale-105 duration-300 drop-shadow-lg">
                                         <i class="fa-regular fa-heart text-lg text-gray-600"></i>
                                     </span>
-                                    <a class="max-h-24 overflow-hidden" href="/details/@item?._id">
+                                    <a class="max-h-24 overflow-hidden" href="/ShakeBlazor/details/@item?._id">
                                         <img class="w-full object-cover rounded-t-lg" src="@item?.Image" alt="" />
                                     </a>
                                 </span>
