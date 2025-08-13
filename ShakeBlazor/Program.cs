@@ -13,8 +13,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services
     .AddGumtreeClient()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://nodegraphql-tog7.onrender.com/"))
-    .ConfigureWebSocketClient(c => c.Uri = new Uri("https://nodegraphql-tog7.onrender.com/"));
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://nodegraphql-tog7.onrender.com/graphql"))
+    .ConfigureWebSocketClient(c => c.Uri = new Uri("https://nodegraphql-tog7.onrender.com/graphql"));
 
 builder.Services
     .AddBlazorise()
